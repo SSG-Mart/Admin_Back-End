@@ -7,8 +7,9 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const authRoute = require("./routers/auth");
-const getMemberRoute = require("./routers/getMember");
-const getItemRoute = require("./routers/getItem");
+const getHome = require("./routers/Home_APIs/Home_GET");
+const MemberManagement = require("./routers/Member_management_APIs/MemberManagement");
+
 
 const app = express();
 const port = 7001;
@@ -36,8 +37,9 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/auth", authRoute);
-app.use("/api/getmember", getMemberRoute);
-app.use("/api/getitem", getItemRoute);
+app.use("/api/home", getHome);
+app.use("/api/member", MemberManagement);
+
 
 app.listen(port, () => {
   console.log(`Running Express Server On PORT ${port}`);
