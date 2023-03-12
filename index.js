@@ -9,6 +9,9 @@ dotenv.config();
 const authRoute = require("./routers/auth");
 const getHome = require("./routers/Home_APIs/Home_GET");
 const MemberManagement = require("./routers/Member_management_APIs/MemberManagement");
+const SellerVerification = require("./routers/Seller_verification_APIs/verification");
+const getImage = require("./routers/Get_images/getImage");
+const getItemForSeller = require("./routers/Seller_verification_APIs/getItemData");
 
 
 const app = express();
@@ -36,9 +39,14 @@ app.use((req, res, next) => {
   next();
 });
 
+
+
 app.use("/api/auth", authRoute);
 app.use("/api/home", getHome);
 app.use("/api/member", MemberManagement);
+app.use("/api/verify", SellerVerification);
+app.use("/api/getimage", getImage);
+app.use("/api/getitem", getItemForSeller);
 
 
 app.listen(port, () => {
