@@ -59,6 +59,7 @@ router.post(
         res.send(err);
       } else {
         if (result.affectedRows == 1) {
+          res.status(200).send("Member activated successfully");
           res.send("Member activated successfully");
         }
       }
@@ -111,7 +112,7 @@ router.post(
         res.send(err);
       } else {
         if (result.affectedRows == 1) {
-          res.send("Member deactivated successfully");
+          res.status(200).send("Member deactivated successfully");
         }
       }
     });
