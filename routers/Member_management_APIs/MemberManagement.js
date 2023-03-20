@@ -147,7 +147,8 @@ Output :
 ]
  */
 router.get("/seller", (req, res) => {
-  const sql = `SELECT user_data.M_ID AS member_id , user_data.f_name AS fist_name, user_data.l_name AS last_name, user_data.user_name, user_data.mobile, user_data.date_of_reg, user_data.email, user_data.address_one AS address_line_one, user_data.district_id, district.name AS district_name , user_data.image, user_data.restrict_ad, seller_data.seller_id , seller_data.C_ID , seller_data.store_name , seller_data.nic , seller_data.date_of_register, seller_data.nic_image, seller_data.restrict_ad FROM user_data INNER JOIN seller_data ON user_data.M_ID = seller_data.M_ID INNER JOIN district ON user_data.district_id = district.district_id`;
+  const sql = `SELECT user_data.M_ID AS member_id , user_data.f_name AS fist_name, user_data.l_name AS last_name, user_data.user_name, user_data.mobile, user_data.date_of_reg, user_data.email, user_data.address_one AS address_line_one, user_data.district_id, district.name AS district_name , user_data.image, user_data.restrict_ad, seller_data.seller_id , seller_data.C_ID , seller_data.store_name , seller_data.nic , seller_data.date_of_register, seller_data.nic_image, seller_data.restrict_ad 
+  FROM seller_data INNER JOIN user_data ON seller_data.M_ID = user_data.M_ID INNER JOIN district ON user_data.district_id = district.district_id`;
   con.query(sql, (err, result) => {
     if (err) {
       res.send(err);
