@@ -59,12 +59,13 @@ router.get("/",(req, res, next) => {
   },
   (req, res, next) => {
     // Seller Count
-    sql_seller = `SELECT * FROM seller_data WHERE restrict_ad="0"`;
+    sql_seller = `SELECT * FROM seller_data WHERE R_admin_id ="1"`;
     con.query(sql_seller, (err, result) => {
       if (err) {
         res.send(err);
       } else {
         req.sellerCount = result.length;
+        console.log(`Seller count: ${result}`);
         next();
       }
     });

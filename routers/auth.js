@@ -7,6 +7,28 @@ const multer = require("multer");
 
 // router.use(cors());
 
+router.post('/login', async(req, res) => {
+    const { email, password } = req.body;
+    const sql = `SELECT email, name FROM admin WHERE email = '${email}' AND password = '${password}'`;
+    
+    con.query(sql, (err, result) => {
+
+        if (err) res.send('login fail')
+
+        if (result.length > 0) {
+
+            req.session.user = result[0];
+
+            res.status(200).send(result[0]);
+
+        } else {
+
+            res.status(401).send("Email or password is incorrect");
+
+        }
+    })
+})
+
 
 
 module.exports = router;

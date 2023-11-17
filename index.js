@@ -40,11 +40,23 @@ app.use((req, res, next) => {
 });
 
 
+const checkAuth = async (req, res, next) => {
+  if (req.session.user) {
+    console.log(req.session.user);
+    next();
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+}
 
-app.use("/api/auth", authRoute);
+
+app.use("/api/admin", authRoute);
+
+app.use(checkAuth);
+
 app.use("/api/home", getHome);
 app.use("/api/member", MemberManagement);
-app.use("/api/verify", SellerVerification);
+app.use("/api/seller", SellerVerification);
 app.use("/api/getimage", getImage);
 app.use("/api/getitem", getItemForSeller);
 
