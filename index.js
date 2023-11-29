@@ -65,6 +65,12 @@ app.use("/api/seller", SellerVerification);
 app.use("/api/getimage", getImage);
 app.use("/api/getitem", getItemForSeller);
 
+app.post('/api/admin/logout', (req, res) => {
+  req.session.destroy();
+  res.clearCookie('connect.sid');
+  res.send("Logout Success");
+})
+
 
 app.listen(port, () => {
   console.log(`Running Express Server On PORT ${port}`);
