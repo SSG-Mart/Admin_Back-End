@@ -17,7 +17,12 @@ const getItemForSeller = require("./routers/Seller_verification_APIs/getItemData
 const app = express();
 const port = 7001;
 
-app.use(cors());
+app.use(cors(
+  {
+    origin: ["http://localhost:3000"],
+    credentials: true,
+  }
+));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -59,6 +64,12 @@ app.use("/api/member", MemberManagement);
 app.use("/api/seller", SellerVerification);
 app.use("/api/getimage", getImage);
 app.use("/api/getitem", getItemForSeller);
+
+app.post('/api/admin/logout', (req, res) => {
+  req.session.destroy();
+  res.clearCookie('connect.sid');
+  res.send("Logout Success");
+})
 
 
 app.listen(port, () => {
