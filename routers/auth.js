@@ -30,6 +30,15 @@ router.post('/login', async(req, res) => {
     })
 })
 
+router.get('/check-auth', async(req, res) => {
+    const {user} = req.session;
+
+    if (user) {
+        res.status(200).send(user);
+    } else {
+        res.status(401).send("Unauthorized");
+    }
+})
 
 
 module.exports = router;
