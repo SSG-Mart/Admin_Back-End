@@ -8,10 +8,10 @@ const multer = require("multer");
 // yftyf
 // router.use(cors());
 
-router.post('/login', async(req, res) => {
+router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     const sql = `SELECT email, name FROM admin WHERE email = '${email}' AND password = '${password}'`;
-    
+    if (email.trim().length < 1 || password.trim().length < 1) res.status(401).send("Email or password is incorrect");
     con.query(sql, (err, result) => {
 
         if (err) res.send('login fail')
@@ -30,8 +30,8 @@ router.post('/login', async(req, res) => {
     })
 })
 
-router.get('/check-auth', async(req, res) => {
-    const {user} = req.session;
+router.get('/check-auth', async (req, res) => {
+    const { user } = req.session;
 
     if (user) {
         res.status(200).send(user);
